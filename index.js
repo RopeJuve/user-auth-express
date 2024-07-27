@@ -5,9 +5,10 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import passport from "passport";
+import cookieParser from 'cookie-parser';
 import bodyParser from "body-parser";
 import viewsRouter from "./routes/viewsRoutes.js";
-import "./passport/passport.js";
+import "./strategies/passport.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 8080;
@@ -18,13 +19,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
-    secret: "secret",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
   })

@@ -11,9 +11,10 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await User.findOne({ email });
-        if (!user) throw new Error("User not found");
+        if (!user) return done(null, false, { message: "User not found" });
         const isPasswordMatch = await bcrypt.compare(password, user.password);
-        if (!isPasswordMatch) throw new Error("Password not match");
+        if (!isPasswordMatch)
+          return done(null, false, { message: "Wrong password" });
         done(null, user);
       } catch (error) {
         done(error, null);

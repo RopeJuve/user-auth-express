@@ -23,3 +23,8 @@ export const register = async (req, res) => {
     res.redirect("/register");
   }
 };
+
+export const logout = (req, res) => {
+  res.clearCookie("token", { httpOnly: true, secure: false });
+  res.redirect("/login");
+};

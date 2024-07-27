@@ -6,6 +6,9 @@
     <title><%= user.first_name  %></title>
 </head>
 <body>
-    <% console.log(user.first_name) %>
+    <h1>Welcome, <%= user.first_name  %></h1>
+    <form action="/logout" method="POST">
+        <button type="submit">Log Out</button>
+    </form>
 </body>
 </html>

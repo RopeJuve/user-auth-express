@@ -1,9 +1,10 @@
+
+
 export const adminPage = (req, res) => {
   const { user } = req;
   if (!user) {
     return res.redirect("/login");
   }
-
   return res.render("Admin", { user });
 };
 
