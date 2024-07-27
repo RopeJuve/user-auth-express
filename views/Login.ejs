@@ -22,14 +22,19 @@
                     <input type="password" name="password" id="password" required>
                 </div>
                 <div class="login-btns">
-                    <button type="submit">Log In</button>
+                    <button class="w-full" type="submit">Log In</button>
 
                 </div>
             </div>
         </form>
-        <form class="google-form" action="/auth/google" method="GET">
-            <button type="submit">Log In with google</button>
-        </form>
+        <div class="btn-group">
+            <form action="/auth/google" method="GET">
+                <button type="submit">Log In with google</button>
+            </form>
+            <form action="/register" method="GET">
+                <button type="submit">Register</button>
+            </form>
+        </div>
     </div>
 </body>
 

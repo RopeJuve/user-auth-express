@@ -10,7 +10,6 @@ h1 {
 }
 
 button {
-    width: 100%;
     padding: 0.8rem 1rem;
     border: none;
     outline: none;
@@ -73,17 +72,21 @@ body {
     transform: translateY(-1rem);
 }
 
+.w-full {
+    width: 100%;
+}
+
 .input-wrapper input:focus {
     border-color: #007bff;
 }
 
-
-.login-btns {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-}
-.google-form{
+.btn-group {
     width: 60%;
     margin: 1rem auto;
+    display: flex;
+    gap: 1rem;
+    &>*,
+    &> * > button {
+        width: 100%;
+    }
 }
