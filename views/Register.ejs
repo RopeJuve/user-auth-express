@@ -10,29 +10,31 @@
 
 <body>
     <h1>Register</h1>
-    <form action="/auth/register" method="POST">
-        <div class="flex-col">
-            <div class="input-wrapper">
+    <div class="form-group">
 
-                <label for="first_name">First Name:</label>
-                <input type="text" name="first_name" id="first_name" required>
-            </div>
-            <div class="input-wrapper">
-                <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" id="last_name" required>
-            </div>
-            <div class="input-wrapper">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" required>
-            </div>
-            <div class="input-wrapper">
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password" required>
-            </div>
-            <button style="width: 100%" type="submit"> Register</button>
-        </div>
-    </form>
+        <form action="/auth/register" method="POST">
+            <div class="flex-col">
+                <div class="input-wrapper">
 
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" id="first_name" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <button style="width: 100%" type="submit"> Register</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

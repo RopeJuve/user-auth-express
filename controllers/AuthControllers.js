@@ -15,6 +15,7 @@ export const register = async (req, res) => {
       last_name,
       email,
       password: hashedPassword,
+      googleId: null,
     });
     await user.save();
     res.redirect("/login");

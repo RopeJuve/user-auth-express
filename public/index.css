@@ -84,9 +84,6 @@ body {
     gap: 1rem;
 }
 .google-form{
-    width: 100%;
-}
-.google-btn{
     width: 60%;
     margin: 1rem auto;
 }

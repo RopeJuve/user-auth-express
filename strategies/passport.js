@@ -34,7 +34,6 @@ passport.use(
       callbackURL: process.env.GOOGLE_REDIRECT_URI,
     },
     async (accessToken, refreshToken, profile, cb) => {
-      console.log(accessToken, refreshToken )
       try {
         let user = await User.findOne({ googleId: profile.id.toString() });
         if (!user) {
