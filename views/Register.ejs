@@ -5,20 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="/index.css">
 </head>
 
 <body>
-    <form action="/register" method="POST">
-        <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" id="first_name" required>
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" id="last_name" required>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" value="Register" />
+    <h1>Register</h1>
+    <form action="/auth/register" method="POST">
+        <div class="flex-col">
+            <div class="input-wrapper">
+
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" id="first_name" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" id="last_name" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button style="width: 100%" type="submit"> Register</button>
+        </div>
     </form>
+
 </body>
 
 </html>

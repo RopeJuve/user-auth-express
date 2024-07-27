@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= user.first_name  %></title>
+    <title>
+        <%= user.first_name %>
+    </title>
 </head>
+
 <body>
-    <h1>Welcome, <%= user.first_name  %></h1>
-    <form action="/logout" method="POST">
+    <h1>Welcome, <%= user.first_name %>
+    </h1>
+    <form action="/auth/logout" method="POST">
         <button type="submit">Log Out</button>
     </form>
 </body>
+
 </html>

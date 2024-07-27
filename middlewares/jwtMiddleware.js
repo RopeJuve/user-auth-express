@@ -17,7 +17,7 @@ export const jwtSingToken = (req, res, next) => {
       process.env.SECRET,
       { expiresIn: "1h" }
     );
-    res.cookie("token", token,);
+    res.cookie("token", token);
     next();
   } catch (error) {
     console.log(error);

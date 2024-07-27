@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/User.model.js";
 
-export const login = async (req, res) => {
+export const login = (req, res) => {
   res.redirect("/admin");
 };
 

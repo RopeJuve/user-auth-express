@@ -1,7 +1,10 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import bcrypt from "bcrypt";
 import User from "../models/User.model.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 passport.use(
   new LocalStrategy(
@@ -18,6 +21,36 @@ passport.use(
         done(null, user);
       } catch (error) {
         done(error, null);
+      }
+    }
+  )
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_REDIRECT_URI,
+    },
+    async (accessToken, refreshToken, profile, cb) => {
+      console.log(accessToken, refreshToken )
+      try {
+        let user = await User.findOne({ googleId: profile.id.toString() });
+        if (!user) {
+          const hashedPassword = await bcrypt.hash(profile.id, 10);
+          const user = new User({
+            first_name: profile.name.givenName,
+            last_name: profile.name.familyName,
+            email: profile.emails[0].value,
+            password: hashedPassword,
+            googleId: profile.id,
+          });
+          await user.save();
+        }
+        return cb(null, user);
+      } catch (error) {
+        cb(error, null);
       }
     }
   )

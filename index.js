@@ -5,9 +5,10 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import passport from "passport";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import viewsRouter from "./routes/viewsRoutes.js";
+import authRouter from "./routes/authRouter.js";
 import "./strategies/passport.js";
 
 dotenv.config();
@@ -35,6 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", viewsRouter);
+app.use("/auth", authRouter);
 
 mongoose
   .connect(process.env.MONGO_DB_URL)

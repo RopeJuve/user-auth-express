@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
+    <link rel="stylesheet" href="/index.css">
 </head>
+
 <body>
-    <form action="/connect" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <button type="submit">Log In</button>
-    </form>
+    <h1>Log In</h1>
+    <div class="form-group">
+        <form action="/auth/connect" method="POST">
+            <div class="flex-col">
+                <div class="input-wrapper">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="login-btns">
+                    <button type="submit">Log In</button>
+
+                </div>
+            </div>
+        </form>
+        <form class="google-form" action="/auth/google" method="GET">
+            <button class="google-btn" type="submit">Log In with google</button>
+        </form>
+    </div>
 </body>
+
 </html>
