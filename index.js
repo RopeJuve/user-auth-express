@@ -1,30 +1,26 @@
 import express from "express";
-import path from "path";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { fileURLToPath } from "url";
 import session from "express-session";
 import passport from "passport";
-import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import viewsRouter from "./routes/viewsRoutes.js";
 import authRouter from "./routes/authRouter.js";
+import cors from "cors";
 import "./strategies/passport.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 8080;
 
 const app = express();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    exposedHeaders: ['authorization'],
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json());
+
 app.use(
   session({
     secret: process.env.SECRET,
@@ -32,11 +28,14 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Login App");
+});
+app.use("/api", authRouter);
+
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use("/", viewsRouter);
-app.use("/auth", authRouter);
 
 mongoose
   .connect(process.env.MONGO_DB_URL)

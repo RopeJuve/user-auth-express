@@ -2,9 +2,12 @@ import bcrypt from "bcrypt";
 import User from "../models/User.model.js";
 
 export const login = (req, res) => {
-  res.redirect("/admin");
+  res.status(200).json({ message: "Logged in successfully" });
 };
-
+export const loginWithToken = (req, res) => {
+  const { user } = req; 
+  res.status(200).json({ user});
+};
 export const register = async (req, res) => {
   try {
     const { first_name, last_name, email, password } = req.body;
@@ -18,14 +21,14 @@ export const register = async (req, res) => {
       googleId: null,
     });
     await user.save();
-    res.redirect("/login");
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.log(error);
-    res.redirect("/register");
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("token", { httpOnly: true, secure: false });
-  res.redirect("/login");
+  req.logout();
+  res.status(200).json({ message: "Logged out successfully" });
 };

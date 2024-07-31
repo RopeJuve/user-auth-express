@@ -4,6 +4,7 @@ dotenv.config();
 
 export const jwtSingToken = (req, res, next) => {
   const { user } = req;
+ 
   if (!user) return res.status(401).redirect("/login");
 
   try {
@@ -17,7 +18,8 @@ export const jwtSingToken = (req, res, next) => {
       process.env.SECRET,
       { expiresIn: "1h" }
     );
-    res.cookie("token", token);
+    res.setHeader("Authorization", `Bearer ${token}`);
+    req.token = token;
     next();
   } catch (error) {
     console.log(error);
@@ -25,11 +27,17 @@ export const jwtSingToken = (req, res, next) => {
 };
 
 export const jwtVerifyToken = (req, res, next) => {
-  const { token } = req.cookies;
-  if (!token) return res.status(401).redirect("/login");
-
+ 
+  const authHeader = req.headers.authorization;
+  console.log(authHeader);
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+  
+  const token = authHeader.split(' ')[1];
   try {
     const user = jwt.verify(token, process.env.SECRET);
+    req.token = token;
     req.user = user;
     next();
   } catch (error) {
